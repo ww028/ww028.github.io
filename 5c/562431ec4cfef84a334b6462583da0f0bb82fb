@@ -1,0 +1,60 @@
+public/CNAME
+  s_3bb7210311e530::t_0df1f1c8a82026 1 gitai:{"mixed_line_ranges":[],"operations":[{"operation_id":"6a3a5c251bfb7f1cbbcdadb1","tool_type":"agent","tool_id":"Write","line_ranges":[{"Single":1}]}]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "5c562431ec4cfef84a334b6462583da0f0bb82fb",
+  "prompts": {},
+  "sessions": {
+    "s_3bb7210311e530": {
+      "agent_id": {
+        "tool": "trae",
+        "id": "6a3a56021bfb7f1cbbcdacdd",
+        "model": "openrouter-2o__dev"
+      },
+      "human_author": "AllenWei <wwjobs@163.com>"
+    }
+  },
+  "attestation_metadata": {
+    "public/CNAME": [
+      {
+        "hash": "s_3bb7210311e530::t_0df1f1c8a82026",
+        "line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "mixed_line_ranges": [],
+        "operations": [
+          {
+            "operation_id": "6a3a5c251bfb7f1cbbcdadb1",
+            "tool_type": "agent",
+            "tool_id": "Write",
+            "line_ranges": [
+              {
+                "Single": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "remote_transcripts": {
+    "s_3bb7210311e530": {
+      "tool": "trae",
+      "conversation_id": "6a3a56021bfb7f1cbbcdacdd",
+      "session_id": "6a3a56021bfb7f1cbbcdacdd",
+      "status": "remote_only",
+      "message": "Remote transcript resolution is not implemented yet for TRAE prompts."
+    },
+    "s_3bb7210311e530::t_0df1f1c8a82026": {
+      "tool": "trae",
+      "conversation_id": "6a3a56021bfb7f1cbbcdacdd",
+      "session_id": "6a3a56021bfb7f1cbbcdacdd",
+      "status": "remote_only",
+      "message": "Remote transcript resolution is not implemented yet for TRAE prompts."
+    }
+  }
+}
