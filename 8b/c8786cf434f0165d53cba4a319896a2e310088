@@ -1,0 +1,31 @@
+package.json
+  h_3a092025eeb1ec 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "8bc8786cf434f0165d53cba4a319896a2e310088",
+  "prompts": {},
+  "humans": {
+    "h_3a092025eeb1ec": {
+      "author": "AllenWei <wwjobs@163.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {
+    "s_3129589ef9c581": {
+      "tool": "trae",
+      "conversation_id": "6a389f0d1bfb7f1cbbcd9fec",
+      "session_id": "6a389f0d1bfb7f1cbbcd9fec",
+      "status": "remote_only",
+      "message": "Remote transcript resolution is not implemented yet for TRAE prompts."
+    },
+    "s_3129589ef9c581::t_5256ee55797f90": {
+      "tool": "trae",
+      "conversation_id": "6a389f0d1bfb7f1cbbcd9fec",
+      "session_id": "6a389f0d1bfb7f1cbbcd9fec",
+      "status": "remote_only",
+      "message": "Remote transcript resolution is not implemented yet for TRAE prompts."
+    }
+  }
+}
