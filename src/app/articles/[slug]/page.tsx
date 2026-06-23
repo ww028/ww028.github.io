@@ -4,15 +4,16 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
-import ViewCounter from "@/components/ViewCounter";
 import TableOfContents from "@/components/TableOfContents";
 import ArticleSidebar from "@/components/ArticleSidebar";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
-
 interface Props {
   params: Promise<{ slug: string }>;
+}
+
+export function generateStaticParams() {
+  return getAllArticles().map((article) => ({ slug: article.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -83,7 +84,6 @@ export default async function ArticlePage({ params }: Props) {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{article.title}</h1>
           <div className="flex items-center gap-4 text-sm text-tertiary">
             <time>{article.date}</time>
-            <ViewCounter slug={article.slug} />
           </div>
           {article.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">

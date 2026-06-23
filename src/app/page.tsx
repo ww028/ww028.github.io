@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { getAllArticles } from "@/lib/articles";
 
-export const dynamic = "force-dynamic";
-
 const skills = [
   { name: "React / Next.js", level: 95 },
   { name: "TypeScript", level: 90 },

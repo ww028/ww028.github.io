@@ -10,26 +10,26 @@ tags: [Next.js, React, 架构设计, SEO, 安全]
 
 ## 技术栈
 
-| 技术                        | 用途                                |
-| --------------------------- | ----------------------------------- |
-| Next.js 15 (App Router)     | 全栈框架，提供服务端渲染和 API 路由 |
-| React 19                    | UI 组件库                           |
-| TypeScript                  | 类型安全                            |
-| Tailwind CSS v4             | 原子化样式方案                      |
-| gray-matter                 | Markdown frontmatter 解析           |
-| react-markdown + remark-gfm | Markdown 渲染（支持 GFM 扩展语法）  |
-| rehype-highlight            | 代码块语法高亮                      |
+| 技术                        | 用途                               |
+| --------------------------- | ---------------------------------- |
+| Next.js 15 (App Router)     | 框架，静态导出生成纯 HTML 站点     |
+| React 19                    | UI 组件库                          |
+| TypeScript                  | 类型安全                           |
+| Tailwind CSS v4             | 原子化样式方案                     |
+| gray-matter                 | Markdown frontmatter 解析          |
+| react-markdown + remark-gfm | Markdown 渲染（支持 GFM 扩展语法） |
+| rehype-highlight            | 代码块语法高亮                     |
 
 ## 架构设计
 
-### 动态渲染 + 文件系统
+### 静态导出 + 文件系统
 
-本站采用 **SSR 动态渲染**（`force-dynamic`）而非静态生成（SSG）。这意味着每次用户访问页面时，服务器都会实时从文件系统读取文章内容。
+本站采用 **静态导出**（`output: "export"`），构建时从文件系统读取所有文章并生成纯静态 HTML。最终产物是一个 `out/` 目录，可以直接托管在 GitHub Pages 等静态服务上。
 
-这个决策的核心考量是：**发布新文章不需要重新构建和部署项目**。只要把 `.md` 文件放到服务器的 `content/articles/` 目录下，刷新即可看到新内容。
+这个决策的核心考量是：**零服务器成本，完全免费托管**。新增文章后只需 push 到 GitHub，Actions 自动重新构建部署。
 
 ```
-请求 → Next.js Server → fs.readFileSync → gray-matter 解析 → React 渲染 → HTML 响应
+git push → GitHub Actions → npm run build → 静态 HTML → GitHub Pages
 ```
 
 ### 文章管理
@@ -42,7 +42,6 @@ content/
 │   ├── project-architecture.md    ← 本文
 │   ├── building-modern-web-apps.md
 │   └── ...
-└── views.json                     ← 阅读量数据
 ```
 
 每篇文章的 frontmatter 包含元信息：
@@ -81,13 +80,6 @@ tags: [React, TypeScript, 前端] # 可选，标签分类
 - 支持搜索标题、摘要和标签内容，实时过滤
 - 搜索和标签筛选可组合使用
 - 纯客户端实现，无需额外后端服务
-
-### 阅读量统计
-
-- 通过 API 路由（`/api/views`）实现
-- 每次访问文章详情页自动 +1（防重复计数）
-- 数据存储在 `content/views.json`，无需数据库
-- 文章列表页和详情页均显示阅读量
 
 ### 主题切换
 
@@ -133,39 +125,16 @@ tags: [React, TypeScript, 前端] # 可选，标签分类
 - 仅允许小写字母、数字和连字符，禁止 `..`、`/`、特殊字符
 - 解析后的绝对路径必须在 `content/articles/` 目录内，双重验证
 
-### API 安全（Views 接口）
-
-POST 请求经过多层校验链路：
-
-1. **IP 限流**：每个 IP 每 60 秒最多 30 次请求，超限返回 429
-2. **请求体解析**：try-catch 捕获非法 JSON，返回 400
-3. **格式校验**：slug 必须为非空字符串
-4. **正则校验**：slug 匹配 `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`
-5. **文章存在性校验**：验证对应 `.md` 文件确实存在，不存在返回 404
-6. **并发写入安全**：通过异步写锁（`withWriteLock`）串行化写操作，避免竞态条件
-7. **原子写入**：先写临时文件再 `rename`，防止写入中断导致数据损坏
-
-限流器每 5 分钟自动清理过期 IP 记录，避免内存无限增长。
-
-### 安全响应头
-
-通过 `next.config.ts` 对所有路由注入安全响应头：
-
-| Header                    | 值                                                         |
-| ------------------------- | ---------------------------------------------------------- |
-| X-Content-Type-Options    | nosniff                                                    |
-| X-Frame-Options           | DENY                                                       |
-| X-XSS-Protection          | 1; mode=block                                              |
-| Referrer-Policy           | strict-origin-when-cross-origin                            |
-| Permissions-Policy        | camera=(), microphone=(), geolocation=()                   |
-| Strict-Transport-Security | max-age=63072000; includeSubDomains; preload               |
-| Content-Security-Policy   | default-src 'self'; script-src 'self' 'unsafe-inline'; ... |
-
 ### XSS 防护
 
 - `react-markdown` 默认不渲染原始 HTML 标签
 - 即使 Markdown 文件中包含 `<script>` 标签也不会执行
-- CSP 头限制了脚本和资源的加载来源
+
+### 静态站点的安全优势
+
+- 无服务端代码运行，不存在 SQL 注入、命令注入等服务端攻击面
+- 无 API 路由，不存在接口滥用或限流问题
+- GitHub Pages 自带 HTTPS，无需自行配置证书
 
 ## SEO 方案
 
@@ -173,11 +142,11 @@ POST 请求经过多层校验链路：
 - **Open Graph**：支持社交平台分享预览（标题、描述、类型）
 - **Twitter Card**：支持 `summary_large_image` 卡片
 - **JSON-LD**：首页输出 `Person` 结构化数据，文章页输出 `BlogPosting`
-- **Sitemap**：动态生成（`force-dynamic`），自动包含所有文章
+- **Sitemap**：构建时自动生成，包含所有文章
 - **Robots.txt**：允许所有爬虫抓取
 - **Canonical URL**：设置 `metadataBase` 和 canonical 链接
 
-由于使用 SSR，搜索引擎爬虫收到的是完整渲染的 HTML，不依赖客户端 JavaScript。
+由于使用静态导出，所有页面都是预渲染的完整 HTML，对搜索引擎非常友好。
 
 ## UI 设计风格
 
@@ -202,19 +171,19 @@ POST 请求经过多层校验链路：
 
 ## 部署方式
 
-项目使用 `next build` 构建后通过 `next start` 运行。部署结构：
+项目托管在 GitHub，使用 **GitHub Pages + GitHub Actions** 自动部署：
+
+1. 开发者 push 代码到 `main` 分支
+2. GitHub Actions 自动触发：安装依赖 → `npm run build` → 上传 `out/` 目录
+3. GitHub Pages 从构建产物中部署静态站点
 
 ```
-/deploy-path/
-├── .next/                  ← 构建产物
-├── node_modules/
-├── package.json
-└── content/                ← 内容目录（独立于构建产物）
-    ├── articles/           ← Markdown 文章
-    └── views.json          ← 阅读量数据
+.github/workflows/deploy.yml    ← Actions 工作流配置
+out/                            ← 构建产物（自动生成，不提交）
+content/articles/               ← Markdown 文章源文件
 ```
 
-新增文章只需将 `.md` 文件放入 `content/articles/`，无需重新构建。阅读量数据也存在同一目录下，方便备份。
+新增文章流程：将 `.md` 文件放入 `content/articles/` → commit & push → Actions 自动构建部署（约 1-2 分钟生效）。
 
 ## 为什么不用 CMS？
 
@@ -229,7 +198,8 @@ POST 请求经过多层校验链路：
 ## 可能的优化方向
 
 - 添加 RSS 订阅
-- 评论系统集成
-- 图片优化（Next.js Image 组件）
+- 评论系统集成（Giscus / Utterances）
+- 图片优化
 - 文章分页加载
 - 全文搜索索引（FlexSearch / Fuse.js）
+- 阅读量统计（接入第三方服务）

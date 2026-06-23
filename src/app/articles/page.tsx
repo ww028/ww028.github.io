@@ -3,8 +3,6 @@ import { getAllArticles, getAllTags } from "@/lib/articles";
 import type { Metadata } from "next";
 import ArticleList from "@/components/ArticleList";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "文章列表",
   description: "张三的技术博客文章，涵盖前端开发、TypeScript、React、Docker 等主题",
