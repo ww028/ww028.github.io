@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.summary,
       type: "article",
       publishedTime: article.date,
-      authors: ["张三"],
+      authors: ["魏微"],
     },
     twitter: {
       card: "summary_large_image",
@@ -59,8 +59,8 @@ export default async function ArticlePage({ params }: Props) {
     headline: article.title,
     description: article.summary,
     datePublished: article.date,
-    author: { "@type": "Person", name: "张三", url: "https://zhangsan.dev" },
-    url: `https://zhangsan.dev/articles/${article.slug}`,
+    author: { "@type": "Person", name: "魏微", url: "https://allenwei.top" },
+    url: `https://allenwei.top/articles/${article.slug}`,
   };
 
   const allArticles = getAllArticles().map(({ slug, title, pinned }) => ({ slug, title, pinned }));

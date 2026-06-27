@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://zhangsan.dev/sitemap.xml",
+    sitemap: "https://allenwei.top/sitemap.xml",
   };
 }

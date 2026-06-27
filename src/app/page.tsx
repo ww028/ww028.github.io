@@ -13,10 +13,10 @@ const skills = [
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "张三",
-  url: "https://zhangsan.dev",
-  jobTitle: "高级前端工程师",
-  description: "全栈开发工程师，专注于 Web 技术和云原生领域",
+  name: "魏微",
+  url: "https://allenwei.top",
+  jobTitle: "资深前端工程师",
+  description: "10 年 Web 前端开发经验，曾任职阿里巴巴集团，后投身创业，具备完整的产品从 0 到 1 落地能力",
   address: { "@type": "PostalAddress", addressLocality: "北京", addressCountry: "CN" },
   knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "Python", "Docker", "Kubernetes"],
 };
@@ -36,22 +36,23 @@ export default function Home() {
           <div className="relative mb-8">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] blur-3xl opacity-25 scale-150" />
             <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full bg-gradient-to-br from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] flex items-center justify-center text-white text-5xl md:text-6xl font-bold shadow-lg">
-              张
+              魏
             </div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] bg-clip-text text-transparent">张三</h1>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] bg-clip-text text-transparent">魏微</h1>
           <p className="text-xl md:text-2xl font-medium text-secondary mb-6">
-            全栈开发工程师 · 开源爱好者
+            资深前端工程师 · Vibe Coding 爱好者
           </p>
           <p className="text-base md:text-lg text-secondary leading-relaxed max-w-2xl mb-8">
-            5 年全栈开发经验，专注于 Web 技术和云原生领域。热爱探索新技术，
-            喜欢用代码解决实际问题。目前在一家互联网公司担任高级前端工程师，
-            负责核心业务系统的架构设计和开发。
+            10 年 Web 前端开发经验，近 2 年深耕全栈开发。<br />
+            曾任职阿里巴巴集团。<br />
+            两年创业经历，独立负责产品评估设计、全栈开发、测试上线及运维部署，具备完整的产品闭环能力。<br />
+            自驱力强，Vibe Coding 爱好者，拥抱变化。
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">📍 北京</span>
-            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">📧 zhangsan@example.com</span>
-            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">🔗 github.com/zhangsan</span>
+            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">📍 上海</span>
+            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">📧 wwjobs@163.com</span>
+            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">🔗 github.com/ww028</span>
           </div>
         </section>
 

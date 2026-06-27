@@ -4,7 +4,7 @@ import { getAllArticles } from "@/lib/articles";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = "https://zhangsan.dev";
+  const siteUrl = "https://allenwei.top";
   const articles = getAllArticles();
 
   const articleEntries = articles.map((article) => ({

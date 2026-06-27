@@ -5,10 +5,10 @@ import ArticleList from "@/components/ArticleList";
 
 export const metadata: Metadata = {
   title: "文章列表",
-  description: "张三的技术博客文章，涵盖前端开发、TypeScript、React、Docker 等主题",
+  description: "魏微的技术博客文章，涵盖前端开发、TypeScript、React、Docker 等主题",
   openGraph: {
-    title: "文章列表 - 张三的个人网站",
-    description: "张三的技术博客文章，涵盖前端开发、TypeScript、React、Docker 等主题",
+    title: "文章列表 - 魏微的个人网站",
+    description: "魏微的技术博客文章，涵盖前端开发、TypeScript、React、Docker 等主题",
   },
 };
 
