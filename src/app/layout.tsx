@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "魏微 - 全栈开发工程师",
+    title: "魏微-全栈开发工程师",
     description:
       "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js等Web技术与云原生领域。",
   },
