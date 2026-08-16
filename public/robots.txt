@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /api/
+
+Sitemap: https://allenwei.top/sitemap.xml

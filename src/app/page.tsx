@@ -1,5 +1,33 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getAllArticles } from "@/lib/articles";
+
+export const metadata: Metadata = {
+  title: "魏微 - 全栈开发工程师 | 个人网站",
+  description:
+    "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js等Web技术与云原生领域，独立负责产品从0到1的全流程。",
+  keywords: [
+    "魏微",
+    "前端工程师",
+    "全栈开发",
+    "React",
+    "TypeScript",
+    "Next.js",
+    "Node.js",
+    "阿里巴巴",
+    "技术博客",
+    "个人网站",
+  ],
+  openGraph: {
+    title: "魏微 - 全栈开发工程师 | 个人网站",
+    description:
+      "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js等Web技术与云原生领域。",
+    url: "https://allenwei.top",
+    type: "website",
+    locale: "zh_CN",
+    siteName: "魏微的个人网站",
+  },
+};
 
 const skills = [
   { name: "React / Next.js", level: 95 },
@@ -7,18 +35,31 @@ const skills = [
   { name: "Node.js", level: 85 },
   { name: "Python", level: 80 },
   { name: "Docker / K8s", level: 75 },
-  { name: "PostgreSQL / Redis", level: 80 },
+  { name: "PostgreSQL / Redis", level: 80 }
 ];
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "魏微",
+  alternateName: "Wei Wei",
   url: "https://allenwei.top",
-  jobTitle: "资深前端工程师",
-  description: "10 年 Web 前端开发经验，曾任职阿里巴巴集团，后投身创业，具备完整的产品从 0 到 1 落地能力",
-  address: { "@type": "PostalAddress", addressLocality: "北京", addressCountry: "CN" },
-  knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "Python", "Docker", "Kubernetes"],
+  jobTitle: "全栈开发工程师",
+  description:
+    "10 年 Web 前端开发经验，曾任职阿里巴巴集团，后投身创业，具备完整的产品从 0 到 1 落地能力。专注React、TypeScript、Node.js等Web技术与云原生领域。",
+  address: { "@type": "PostalAddress", addressLocality: "上海", addressCountry: "CN" },
+  knowsAbout: [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Python",
+    "Kubernetes",
+    "前端开发",
+    "全栈开发",
+    "Web开发",
+  ],
+  sameAs: ["https://github.com/ww028"],
 };
 
 export default function Home() {
@@ -39,26 +80,39 @@ export default function Home() {
               魏
             </div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] bg-clip-text text-transparent">魏微</h1>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] bg-clip-text text-transparent">
+            魏微
+          </h1>
           <p className="text-xl md:text-2xl font-medium text-secondary mb-6">
-            资深前端工程师 · Vibe Coding 爱好者
+            全栈开发工程师 · Vibe Coding 爱好者
           </p>
           <p className="text-base md:text-lg text-secondary leading-relaxed max-w-2xl mb-8">
-            10 年 Web 前端开发经验，近 2 年深耕全栈开发。<br />
-            曾任职阿里巴巴集团。<br />
-            两年创业经历，独立负责产品评估设计、全栈开发、测试上线及运维部署，具备完整的产品闭环能力。<br />
+            10 年 Web 前端开发经验，近 2 年深耕全栈开发。
+            <br />
+            曾任职阿里巴巴集团。
+            <br />
+            两年创业经历，独立负责产品评估设计、全栈开发、测试上线及运维部署，具备完整的产品闭环能力。
+            <br />
             自驱力强，Vibe Coding 爱好者，拥抱变化。
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">📍 上海</span>
-            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">📧 wwjobs@163.com</span>
-            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">🔗 github.com/ww028</span>
+            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">
+              📍 上海
+            </span>
+            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">
+              📧 wwjobs@163.com
+            </span>
+            <span className="px-4 py-2 rounded-full bg-surface text-sm text-secondary">
+              🔗 github.com/ww028
+            </span>
           </div>
         </section>
 
         {/* Skills */}
         <section className="animate-fade-in-up stagger-1">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-12">专业技能</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-12">
+            专业技能
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {skills.map((skill) => (
               <div
@@ -68,7 +122,9 @@ export default function Home() {
                 <div className="text-3xl font-bold tracking-tight text-accent mb-2">
                   {skill.level}%
                 </div>
-                <div className="text-sm font-medium text-secondary">{skill.name}</div>
+                <div className="text-sm font-medium text-secondary">
+                  {skill.name}
+                </div>
               </div>
             ))}
           </div>
@@ -77,8 +133,12 @@ export default function Home() {
         {/* Latest Articles */}
         <section className="animate-fade-in-up stagger-2">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">最新文章</h2>
-            <p className="text-secondary">探索技术世界的最新思考</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              最新文章
+            </h2>
+            <p className="text-secondary">
+              探索技术世界的最新思考
+            </p>
           </div>
           <div className="space-y-4">
             {articles.slice(0, 3).map((article) => (

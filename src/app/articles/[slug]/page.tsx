@@ -19,21 +19,38 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
-  if (!article) return { title: "文章未找到" };
+  if (!article) return { title: "文章未找到 - 魏微" };
+  const keywords = [
+    article.title,
+    "魏微",
+    "前端开发",
+    "技术博客",
+    ...article.tags,
+  ];
   return {
     title: article.title,
     description: article.summary,
+    keywords,
+    authors: [{ name: "魏微", url: "https://allenwei.top" }],
     openGraph: {
       title: article.title,
       description: article.summary,
       type: "article",
       publishedTime: article.date,
       authors: ["魏微"],
+      url: `https://allenwei.top/articles/${article.slug}`,
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.summary,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `https://allenwei.top/articles/${article.slug}`,
     },
   };
 }

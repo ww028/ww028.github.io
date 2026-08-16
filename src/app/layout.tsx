@@ -18,30 +18,61 @@ const siteUrl = "https://allenwei.top";
 
 export const metadata: Metadata = {
   title: {
-    default: "魏微的个人网站",
-    template: "%s - 魏微的个人网站",
+    default: "魏微 - 全栈开发工程师 | 个人网站",
+    template: "%s | 魏微",
   },
-  description: "全栈开发工程师，专注于 Web 技术和云原生领域，热爱技术与开源",
+  description:
+    "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js、等Web技术与云原生领域。",
   metadataBase: new URL(siteUrl),
+  keywords: [
+    "魏微",
+    "前端工程师",
+    "全栈开发",
+    "React",
+    "TypeScript",
+    "Next.js",
+    "Node.js",
+    "阿里巴巴",
+    "技术博客",
+    "个人网站",
+  ],
+  authors: [{ name: "魏微", url: siteUrl }],
+  creator: "魏微",
+  publisher: "魏微",
   openGraph: {
     type: "website",
     locale: "zh_CN",
     url: siteUrl,
     siteName: "魏微的个人网站",
-    title: "魏微的个人网站",
-    description: "全栈开发工程师，专注于 Web 技术和云原生领域，热爱技术与开源",
+    title: "魏微 - 全栈开发工程师 | 个人网站",
+    description:
+      "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js等Web技术与云原生领域。",
   },
   twitter: {
     card: "summary_large_image",
-    title: "魏微的个人网站",
-    description: "全栈开发工程师，专注于 Web 技术和云原生领域，热爱技术与开源",
+    title: "魏微 - 全栈开发工程师",
+    description:
+      "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js等Web技术与云原生领域。",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
   alternates: {
     canonical: siteUrl,
+  },
+  verification: {
+    // 百度站长平台验证码 — 去百度站长平台添加站点后会给你一个 code，替换下面的值
+    // other: { "baidu-site-verification": "你的百度验证码" },
+  },
+  other: {
+    "baidu-site-verification": "请替换为百度站长平台给你的验证码",
+    "renderer": "webkit",
+    "format-detection": "telephone=no,email=no,address=no",
   },
 };
 
