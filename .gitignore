@@ -42,3 +42,6 @@ next-env.d.ts
 
 # runtime data
 content/views.json
+
+# deploy artifacts
+website-standalone.tar.gz

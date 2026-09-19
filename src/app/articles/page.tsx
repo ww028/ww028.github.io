@@ -3,6 +3,9 @@ import { getAllArticles, getAllTags } from "@/lib/articles";
 import type { Metadata } from "next";
 import ArticleList from "@/components/ArticleList";
 
+// ISR：见 src/app/page.tsx 的说明
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "文章列表",
   description: "魏微的技术博客文章，涵盖前端开发、TypeScript、React、Docker 等主题",

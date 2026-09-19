@@ -8,6 +8,11 @@ import TableOfContents from "@/components/TableOfContents";
 import ArticleSidebar from "@/components/ArticleSidebar";
 import type { Metadata } from "next";
 
+// ISR：见 src/app/page.tsx 的说明。
+// generateStaticParams 只覆盖构建时已存在的文章，新上传的 .md 首次访问时按需渲染
+// （dynamicParams 默认开启），之后同样进入缓存。
+export const revalidate = 3600;
+
 interface Props {
   params: Promise<{ slug: string }>;
 }

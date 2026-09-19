@@ -2,6 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllArticles } from "@/lib/articles";
 
+// ISR：HTML 由服务端渲染后缓存 1 小时，到期后台重新生成。
+// 发文章后想立刻生效，调 /api/revalidate 主动刷新（见 deploy/publish.sh）。
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "魏微 - 全栈开发工程师 | 个人网站",
   description:

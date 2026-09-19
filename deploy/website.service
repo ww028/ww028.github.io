@@ -1,0 +1,31 @@
+[Unit]
+Description=allenwei.top Next.js website (standalone)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/website/app
+
+# Node 必须写绝对路径：nvm 装的不在 systemd 的 PATH 里，写 node 会 command not found
+ExecStart=/www/server/nvm/versions/node/v24.18.0/bin/node server.js
+
+Environment="NODE_ENV=production"
+Environment="PORT=3000"
+# content 根目录，文章在 $CONTENT_DIR/articles/*.md
+Environment="CONTENT_DIR=/opt/website/content"
+# 给 V8 堆设上限，防止 SSR 峰值把机器吃穿（JS 侧的 -Xmx）
+Environment="NODE_OPTIONS=--max-old-space-size=256"
+# REVALIDATE_TOKEN 单独放文件里，权限 600
+EnvironmentFile=/opt/website/revalidate.env
+
+Restart=always
+RestartSec=3
+# 兜底硬上限（Node 的 RSS 会高于 V8 堆，留余量）
+MemoryMax=512M
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
