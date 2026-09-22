@@ -147,9 +147,6 @@ export default async function ArticlePage({ params }: Props) {
           categoryId="DIC_kwDOHkmnis4DGJG6"
         />
       </article>
-
-      {/* 不蒜子阅读量统计脚本 */}
-      <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" />
     </>
   );
 }
