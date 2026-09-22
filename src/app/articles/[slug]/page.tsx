@@ -95,7 +95,7 @@ export default async function ArticlePage({ params }: Props) {
           href="/"
           className="text-sm text-accent hover:opacity-70 transition-opacity mb-8 inline-block"
         >
-          ← 返回文章列表
+          ← 返回首页
         </Link>
         <header className="mb-10">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{article.title}</h1>

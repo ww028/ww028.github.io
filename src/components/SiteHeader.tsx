@@ -2,14 +2,17 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 
 export default function SiteHeader() {
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    // 路由切换时，重置滚动基准位置，避免新页面滚动到顶部触发误判
     lastScrollY.current = window.scrollY;
 
     const updateHidden = () => {
@@ -43,7 +46,7 @@ export default function SiteHeader() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <header
