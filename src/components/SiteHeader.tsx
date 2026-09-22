@@ -17,15 +17,15 @@ export default function SiteHeader() {
       const delta = currentY - lastScrollY.current;
 
       // 滚动到顶部，强制显示
-      if (currentY < 80) {
+      if (currentY < 20) {
         setHidden(false);
       } else {
         // 向下滚动超过阈值 → 隐藏
-        if (delta > 8) {
+        if (delta > 6) {
           setHidden(true);
         }
         // 向上滚动 → 显示
-        else if (delta < -8) {
+        else if (delta < -6) {
           setHidden(false);
         }
       }
