@@ -42,7 +42,7 @@ export default function Giscus({ repo, repoId, category, categoryId }: Props) {
     // 监听主题变化，动态切换 Giscus 主题
     const observer = new MutationObserver(() => {
       const theme = getTheme();
-      const iframe = container.querySelector("iframe.giscus-frame");
+      const iframe = container.querySelector("iframe.giscus-frame") as HTMLIFrameElement | null;
       if (iframe?.contentWindow) {
         iframe.contentWindow.postMessage(
           { giscus: { setConfig: { theme } } },
