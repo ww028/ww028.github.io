@@ -6,6 +6,7 @@ import rehypeHighlight from "rehype-highlight";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
 import TableOfContents from "@/components/TableOfContents";
 import ArticleSidebar from "@/components/ArticleSidebar";
+import Giscus from "@/components/Giscus";
 import type { Metadata } from "next";
 
 interface Props {
@@ -99,6 +100,10 @@ export default async function ArticlePage({ params }: Props) {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{article.title}</h1>
           <div className="flex items-center gap-4 text-sm text-tertiary">
             <time>{article.date}</time>
+            <span>·</span>
+            <span id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv">0</span> 次
+            </span>
           </div>
           {article.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
@@ -134,7 +139,18 @@ export default async function ArticlePage({ params }: Props) {
             {article.content}
           </ReactMarkdown>
         </div>
+
+        {/* 评论区 */}
+        <Giscus
+          repo="ww028/ww028.github.io"
+          repoId="R_kgDOHkmnig"
+          category="Announcements"
+          categoryId="DIC_kwDOHkmnis4DGJG6"
+        />
       </article>
+
+      {/* 不蒜子阅读量统计脚本 */}
+      <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" />
     </>
   );
 }
