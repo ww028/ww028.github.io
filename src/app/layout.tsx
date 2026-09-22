@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
+import ThemeSync from "@/components/ThemeSync";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -80,11 +81,12 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}})()`,
+            __html: `(function(){var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d){document.documentElement.classList.add('dark')}document.documentElement.style.backgroundColor=d?'#0f0f1a':'#fefefe';document.documentElement.style.color=d?'#eeeeff':'#1a1a2e'})()`,
           }}
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <ThemeSync />
         <SiteHeader />
         <main className="flex-1 max-w-5xl mx-auto px-6 pt-28 pb-20 w-full">
           {children}
