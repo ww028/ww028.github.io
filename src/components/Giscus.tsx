@@ -13,8 +13,13 @@ export default function Giscus({ repo, repoId, category, categoryId }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
 
+    const getTheme = () =>
+      document.documentElement.classList.contains("dark") ? "dark" : "light";
+
+    // 加载 Giscus 脚本
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
     script.async = true;
@@ -28,16 +33,32 @@ export default function Giscus({ repo, repoId, category, categoryId }: Props) {
     script.setAttribute("data-reactions-enabled", "1");
     script.setAttribute("data-emit-metadata", "0");
     script.setAttribute("data-input-position", "bottom");
-    script.setAttribute("data-theme", "preferred_color_scheme");
+    script.setAttribute("data-theme", getTheme());
     script.setAttribute("data-lang", "zh-CN");
     script.setAttribute("data-loading", "lazy");
 
-    containerRef.current.appendChild(script);
+    container.appendChild(script);
+
+    // 监听主题变化，动态切换 Giscus 主题
+    const observer = new MutationObserver(() => {
+      const theme = getTheme();
+      const iframe = container.querySelector("iframe.giscus-frame");
+      if (iframe?.contentWindow) {
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme } } },
+          "https://giscus.app"
+        );
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = "";
-      }
+      observer.disconnect();
+      container.innerHTML = "";
     };
   }, [repo, repoId, category, categoryId]);
 
