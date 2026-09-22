@@ -7,6 +7,7 @@ import { getAllArticles, getArticleBySlug } from "@/lib/articles";
 import TableOfContents from "@/components/TableOfContents";
 import ArticleSidebar from "@/components/ArticleSidebar";
 import Giscus from "@/components/Giscus";
+import PageViewCount from "@/components/PageViewCount";
 import type { Metadata } from "next";
 
 interface Props {
@@ -101,9 +102,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="flex items-center gap-4 text-sm text-tertiary">
             <time>{article.date}</time>
             <span>·</span>
-            <span id="busuanzi_container_page_pv">
-              阅读 <span id="busuanzi_value_page_pv">0</span> 次
-            </span>
+            <PageViewCount />
           </div>
           {article.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
