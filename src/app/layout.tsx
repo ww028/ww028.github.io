@@ -95,6 +95,9 @@ export default function RootLayout({
           <div className="max-w-5xl mx-auto px-6">
             <div className="h-px bg-gradient-to-r from-transparent via-[var(--gradient-mid)]/20 to-transparent mb-8" />
             © 2026 魏微的博客. All rights reserved.
+            <div className="text-xs opacity-30 mt-2 font-mono">
+              v{process.env.NEXT_PUBLIC_GIT_HASH || "dev"}
+            </div>
           </div>
         </footer>
       </body>
