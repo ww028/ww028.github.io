@@ -18,23 +18,16 @@ const siteUrl = "https://allenwei.top";
 
 export const metadata: Metadata = {
   title: {
-    default: "魏微 - 全栈开发工程师 | 个人网站",
-    template: "%s | 魏微",
+    default: "魏微的博客",
+    template: "%s | 魏微的博客",
   },
   description:
-    "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js、等Web技术与云原生领域。",
+    "魏微的个人博客，记录生活、思考与实践。",
   metadataBase: new URL(siteUrl),
   keywords: [
+    "博客",
+    "个人博客",
     "魏微",
-    "前端工程师",
-    "全栈开发",
-    "React",
-    "TypeScript",
-    "Next.js",
-    "Node.js",
-    "阿里巴巴",
-    "技术博客",
-    "个人网站",
   ],
   authors: [{ name: "魏微", url: siteUrl }],
   creator: "魏微",
@@ -43,16 +36,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "zh_CN",
     url: siteUrl,
-    siteName: "魏微的个人网站",
-    title: "魏微 - 全栈开发工程师 | 个人网站",
-    description:
-      "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js等Web技术与云原生领域。",
+    siteName: "魏微的博客",
+    title: "魏微的博客",
+    description: "记录生活、思考与实践",
   },
   twitter: {
     card: "summary_large_image",
-    title: "魏微 - 全栈开发工程师",
-    description:
-      "魏微，全栈开发工程师，10年Web前端开发经验，曾任职阿里巴巴。专注React、TypeScript、Node.js等Web技术与云原生领域。",
+    title: "魏微的博客",
+    description: "记录生活、思考与实践",
   },
   robots: {
     index: true,
@@ -102,10 +93,10 @@ export default function RootLayout({
             </Link>
             <div className="flex items-center gap-6">
               <Link href="/" className="text-sm font-medium hover:opacity-60 transition-opacity">
-                首页
+                博客
               </Link>
-              <Link href="/articles" className="text-sm font-medium hover:opacity-60 transition-opacity">
-                文章
+              <Link href="/about" className="text-sm font-medium hover:opacity-60 transition-opacity">
+                关于
               </Link>
               <ThemeToggle />
             </div>
@@ -117,7 +108,7 @@ export default function RootLayout({
         <footer className="py-12 text-center text-sm text-tertiary">
           <div className="max-w-5xl mx-auto px-6">
             <div className="h-px bg-gradient-to-r from-transparent via-[var(--gradient-mid)]/20 to-transparent mb-8" />
-            © 2026 魏微. All rights reserved.
+            © 2026 魏微的博客. All rights reserved.
           </div>
         </footer>
       </body>

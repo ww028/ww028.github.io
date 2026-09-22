@@ -1,6 +1,6 @@
-# 魏微的个人网站
+# 魏微的博客
 
-基于 Next.js 16 构建的个人技术博客，部署于 GitHub Pages。
+基于 Next.js 16 构建的个人博客，部署于 GitHub Pages。
 
 ## 技术栈
 
@@ -17,6 +17,12 @@
 - 📑 文章目录 (TOC) 自动生成
 - 🔎 SEO 优化 (Open Graph、JSON-LD、Sitemap)
 - 📱 响应式设计
+
+## 页面结构
+
+- `/` - 博客首页（文章列表 + 搜索 + 标签筛选）
+- `/articles/[slug]` - 文章详情页
+- `/about` - 关于我
 
 ## 本地开发
 
@@ -44,7 +50,7 @@ npm run lint
 ---
 title: 文章标题
 date: 2026-06-01
-tags: [React, TypeScript]
+tags: [标签1, 标签2]
 summary: 文章摘要
 pinned: false
 ---

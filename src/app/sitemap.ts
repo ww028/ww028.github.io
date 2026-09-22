@@ -1,10 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllArticles } from "@/lib/articles";
 
-// 原来是 dynamic = "force-static"：sitemap 在构建时生成后永不更新，
-// 新增文章后它不会变化，搜索引擎就发现不了新页面。
-// 改成和普通页面一样的 ISR：缓存 1 小时，发文章时由 /api/revalidate 主动刷新。
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = "https://allenwei.top";
@@ -33,10 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${siteUrl}/articles`,
+      url: `${siteUrl}/about`,
       lastModified: new Date(latestDate),
-      changeFrequency: "weekly",
-      priority: 0.8,
+      changeFrequency: "yearly",
+      priority: 0.5,
     },
     ...articleEntries,
   ];

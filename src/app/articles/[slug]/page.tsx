@@ -8,11 +8,6 @@ import TableOfContents from "@/components/TableOfContents";
 import ArticleSidebar from "@/components/ArticleSidebar";
 import type { Metadata } from "next";
 
-// ISR：见 src/app/page.tsx 的说明。
-// generateStaticParams 只覆盖构建时已存在的文章，新上传的 .md 首次访问时按需渲染
-// （dynamicParams 默认开启），之后同样进入缓存。
-export const revalidate = 3600;
-
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -28,8 +23,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const keywords = [
     article.title,
     "魏微",
-    "前端开发",
-    "技术博客",
     ...article.tags,
   ];
   return {
@@ -97,7 +90,7 @@ export default async function ArticlePage({ params }: Props) {
       <TableOfContents content={article.content} />
       <article className="max-w-none animate-fade-in-up xl:max-w-3xl xl:mx-auto">
         <Link
-          href="/articles"
+          href="/"
           className="text-sm text-accent hover:opacity-70 transition-opacity mb-8 inline-block"
         >
           ← 返回文章列表
@@ -112,7 +105,7 @@ export default async function ArticlePage({ params }: Props) {
               {article.tags.map((tag) => (
                 <Link
                   key={tag}
-                  href={`/articles?tag=${encodeURIComponent(tag)}`}
+                  href={`/?tag=${encodeURIComponent(tag)}`}
                   className="text-xs px-2.5 py-1 rounded-full bg-surface text-secondary hover:bg-accent/10 hover:text-accent transition-all duration-200"
                 >
                   {tag}

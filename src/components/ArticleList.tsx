@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface ArticleMeta {
   slug: string;
@@ -18,8 +19,18 @@ interface Props {
 }
 
 export default function ArticleList({ articles, tags }: Props) {
+  const searchParams = useSearchParams();
+  const initialTag = searchParams.get("tag");
+
   const [search, setSearch] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  // 从 URL 同步初始标签
+  useEffect(() => {
+    if (initialTag) {
+      setSelectedTag(initialTag);
+    }
+  }, [initialTag]);
 
   const filtered = articles.filter((article) => {
     const matchesSearch =
