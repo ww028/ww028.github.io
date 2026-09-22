@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import ThemeSync from "@/components/ThemeSync";
+import BackgroundLayer from "@/components/BackgroundLayer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -87,6 +88,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <ThemeSync />
+        <BackgroundLayer />
         <SiteHeader />
         <main className="flex-1 max-w-5xl mx-auto px-6 pt-28 pb-20 w-full">
           {children}
@@ -96,7 +98,7 @@ export default function RootLayout({
             <div className="h-px bg-gradient-to-r from-transparent via-[var(--gradient-mid)]/20 to-transparent mb-8" />
             © 2026 魏微的博客. All rights reserved.
             <div className="text-xs opacity-30 mt-2 font-mono">
-              v{process.env.NEXT_PUBLIC_GIT_HASH || "dev"}
+              v{new Date().toISOString().slice(2, 7).replace("-", ".")}.{process.env.NEXT_PUBLIC_GIT_HASH || "dev"}
             </div>
           </div>
         </footer>
