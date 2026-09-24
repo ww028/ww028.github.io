@@ -3,6 +3,7 @@ title: TypeScript 高级类型模式
 summary: 深入了解 TypeScript 中的条件类型、映射类型和模板字面量类型等高级特性。
 date: 2026-06-01
 tags: [TypeScript, 前端, 类型系统]
+publishTo: [blog, personal]
 ---
 
 TypeScript 的类型系统是图灵完备的，掌握高级类型模式可以让我们写出更安全、更具表达力的代码。

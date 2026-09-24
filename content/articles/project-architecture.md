@@ -4,6 +4,7 @@ summary: 详细介绍本博客所采用的技术方案、架构设计和关键�
 date: 2026-06-22
 pinned: true
 tags: [Next.js, React, 架构设计, SEO, 安全]
+publishTo: [blog]
 ---
 
 本文介绍这个博客的整体技术架构、选型理由和设计思路，帮助你了解项目背后的工程决策。

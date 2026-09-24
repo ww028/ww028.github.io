@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+import { ArticleContent } from "@ww028/blog-kit/content";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
 import TableOfContents from "@/components/TableOfContents";
 import ArticleSidebar from "@/components/ArticleSidebar";
@@ -53,13 +51,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://allenwei.top/articles/${article.slug}`,
     },
   };
-}
-
-function generateHeadingId(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\u4e00-\u9fff]+/g, "-")
-    .replace(/^-|-$/g, "");
 }
 
 export default async function ArticlePage({ params }: Props) {
@@ -118,26 +109,7 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           )}
         </header>
-        <div className="article-content">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight]}
-            components={{
-              h2: ({ children }) => {
-                const text = String(children).replace(/[`*_~]/g, "");
-                const id = generateHeadingId(text);
-                return <h2 id={id}>{children}</h2>;
-              },
-              h3: ({ children }) => {
-                const text = String(children).replace(/[`*_~]/g, "");
-                const id = generateHeadingId(text);
-                return <h3 id={id}>{children}</h3>;
-              },
-            }}
-          >
-            {article.content}
-          </ReactMarkdown>
-        </div>
+        <ArticleContent id="article-content" content={article.content} />
 
         {/* 评论区 */}
         <Giscus

@@ -3,6 +3,7 @@ title: Docker 容器化部署实战
 summary: 从 Dockerfile 编写到 Docker Compose 编排，掌握容器化部署的核心知识。
 date: 2026-05-10
 tags: [Docker, DevOps, 部署]
+publishTo: [blog, personal]
 ---
 
 容器化技术已经成为现代应用部署的标准方式。Docker 让应用的构建、分发和运行变得简单可靠。

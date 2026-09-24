@@ -3,6 +3,7 @@ title: React 性能优化指南
 summary: 从组件渲染、状态管理到打包优化，全面介绍 React 应用的性能优化策略。
 date: 2026-05-20
 tags: [React, 性能优化, 前端]
+publishTo: [blog, personal]
 ---
 
 React 应用的性能优化是一个系统工程，需要从多个层面入手。

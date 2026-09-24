@@ -3,6 +3,7 @@ title: 构建现代 Web 应用的最佳实践
 summary: 探讨使用 React、Next.js 和 TypeScript 构建高性能 Web 应用的关键技术和最佳实践。
 date: 2026-06-15
 tags: [React, Next.js, TypeScript, 前端]
+publishTo: [blog, personal]
 ---
 
 在现代前端开发中，选择合适的技术栈至关重要。React 作为最流行的前端框架之一，配合 Next.js 的服务端渲染能力和 TypeScript 的类型安全，可以帮助我们构建出高质量的 Web 应用。

@@ -53,8 +53,28 @@ date: 2026-06-01
 tags: [标签1, 标签2]
 summary: 文章摘要
 pinned: false
+publishTo: [blog, personal]
 ---
 ```
+
+`publishTo` 必须显式声明：
+
+- `[blog, personal]`：同步到个人网站，并在两个网站展示。
+- `[blog]`：只在本博客展示，适合本站架构说明等站点专属文章。
+
+本地预演同步（不写文件）：
+
+```bash
+npm run sync:articles:check
+```
+
+确认后同步到相邻的 `allenwei-website/content/shared/` 受管理目录：
+
+```bash
+npm run sync:articles:personal
+```
+
+同步清单会记录内容版本和文件哈希；遇到未受管理的同名文件或被手动修改的托管文件会直接停止，避免静默覆盖。共享模块的本地说明见 `packages/blog-kit/README.md`。
 
 ## 部署
 

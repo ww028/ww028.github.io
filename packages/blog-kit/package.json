@@ -1,0 +1,38 @@
+{
+  "name": "@ww028/blog-kit",
+  "version": "0.1.0-local.1",
+  "description": "Shared article rendering and table of contents for Weiwei's sites",
+  "private": true,
+  "type": "module",
+  "files": ["dist", "src/styles.css", "README.md"],
+  "sideEffects": ["**/*.css"],
+  "exports": {
+    "./content": { "types": "./dist/ArticleContent.d.ts", "import": "./dist/ArticleContent.js" },
+    "./headings": { "types": "./dist/headings.d.ts", "import": "./dist/headings.js" },
+    "./toc": { "types": "./dist/TableOfContents.d.ts", "import": "./dist/TableOfContents.js" },
+    "./styles.css": "./src/styles.css"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "mdast-util-to-string": "4.0.0",
+    "react-markdown": "10.1.0",
+    "rehype-highlight": "7.0.2",
+    "remark-gfm": "4.0.1",
+    "remark-parse": "11.0.0",
+    "unified": "11.0.5"
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.0",
+    "@types/react": "^19.0.0",
+    "@types/unist": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
