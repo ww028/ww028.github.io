@@ -16,11 +16,11 @@
 - [x] 博客 robots 中的 sitemap 地址改为 `https://wwblog.cn/sitemap.xml`
 - [x] 个人站共享文章 canonical 改为 `https://wwblog.cn/articles/<slug>`
 - [x] 删除博客中无效的百度验证占位值
-- [ ] 部署后确认 `https://wwblog.cn` 正常访问
-- [ ] 部署后确认 `https://www.wwblog.cn` 跳转到 `https://wwblog.cn`
-- [ ] 部署后确认 `https://ww028.github.io` 跳转到 `https://wwblog.cn`
-- [ ] 检查博客首页和文章页最终 HTML 中 canonical、`og:url`、JSON-LD 均使用 `wwblog.cn`
-- [ ] 检查 `https://wwblog.cn/sitemap.xml` 和 `https://wwblog.cn/robots.txt`
+- [x] 部署后确认 `https://wwblog.cn` 正常访问
+- [x] 部署后确认 `https://www.wwblog.cn` 跳转到 `https://wwblog.cn`
+- [x] 部署后确认 `https://ww028.github.io` 跳转到 `https://wwblog.cn`
+- [x] 检查博客首页和文章页最终 HTML 中 canonical、`og:url`、JSON-LD 均使用 `wwblog.cn`
+- [x] 检查 `https://wwblog.cn/sitemap.xml` 和 `https://wwblog.cn/robots.txt`
 
 ## P1：建立“魏微”人物实体
 
