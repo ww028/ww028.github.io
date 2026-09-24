@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { getAllArticles, getAllTags } from "@/lib/articles";
 import ArticleList from "@/components/ArticleList";
 
-const siteUrl = "https://ww028.github.io";
+const siteUrl = "https://wwblog.cn";
 const authorUrl = "https://allenwei.top";
 
 export const metadata: Metadata = {

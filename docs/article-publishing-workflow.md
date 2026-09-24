@@ -6,7 +6,7 @@
 
 | 对象 | 职责 | 发布方式 |
 | --- | --- | --- |
-| `ww028.github.io` | 共享文章唯一来源、纯静态博客 | 推送 `main` 后由 GitHub Pages 自动部署 |
+| `wwblog.cn`（仓库：`ww028.github.io`） | 共享文章唯一来源、纯静态博客 | 推送 `main` 后由 GitHub Pages 自动部署 |
 | `allenwei-website` | 综合个人网站，共享文章是其中一个模块 | 内容 PR 自动合并，服务器仍由维护者手动发布 |
 
 共享文章正文只在博客仓库维护。个人站的 `content/shared/` 是受同步清单管理的副本，不应手工编辑。
@@ -107,7 +107,7 @@ git push origin main
 4. 上传 `out/`；
 5. 部署 GitHub Pages。
 
-成功后博客文章自动上线，不需要人工部署。
+成功后博客文章自动发布到 `https://wwblog.cn`，不需要人工部署；GitHub Pages 默认地址只作为底层托管入口。
 
 ## 6. 共享文章自动进入个人站
 

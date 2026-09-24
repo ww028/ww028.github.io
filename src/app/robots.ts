@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://ww028.github.io/sitemap.xml",
+    sitemap: "https://wwblog.cn/sitemap.xml",
   };
 }

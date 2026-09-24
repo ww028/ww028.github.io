@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://ww028.github.io";
+const siteUrl = "https://wwblog.cn";
 const authorUrl = "https://allenwei.top";
 
 export const metadata: Metadata = {
@@ -58,12 +58,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
-  verification: {
-    // 百度站长平台验证码 — 去百度站长平台添加站点后会给你一个 code，替换下面的值
-    // other: { "baidu-site-verification": "你的百度验证码" },
-  },
   other: {
-    "baidu-site-verification": "请替换为百度站长平台给你的验证码",
     "renderer": "webkit",
     "format-detection": "telephone=no,email=no,address=no",
   },

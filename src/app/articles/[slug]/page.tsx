@@ -12,7 +12,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-const siteUrl = "https://ww028.github.io";
+const siteUrl = "https://wwblog.cn";
 const authorUrl = "https://allenwei.top";
 
 export function generateStaticParams() {

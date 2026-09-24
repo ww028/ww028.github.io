@@ -4,7 +4,7 @@ import { getAllArticles } from "@/lib/articles";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = "https://ww028.github.io";
+  const siteUrl = "https://wwblog.cn";
   const articles = getAllArticles();
 
   // 首页/列表页的 lastModified 取"最新一篇文章的日期"，不用 new Date()。
