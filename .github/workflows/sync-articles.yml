@@ -107,7 +107,7 @@ jobs:
               --base main \
               --head "$SYNC_BRANCH" \
               --title "chore: sync shared blog articles" \
-              --body "Automated content sync from ww028/ww028.github.io at commit \`$SOURCE_SHA\`. This PR updates only manifest-managed shared articles and article assets. Review and merge it, then publish the personal website manually."
+              --body "Automated content sync from ww028/ww028.github.io at commit \`$SOURCE_SHA\`. This PR updates only manifest-managed shared articles and article assets. Validation runs automatically; eligible changes are squash-merged after all safeguards pass. Publish the personal website manually after the merge."
           else
             gh pr comment "$existing" --repo "$TARGET_REPOSITORY" --body "Updated from blog commit \`$SOURCE_SHA\`."
           fi

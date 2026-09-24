@@ -76,7 +76,9 @@ npm run sync:articles:personal
 
 同步清单会记录内容版本和文件哈希；遇到未受管理的同名文件或被手动修改的托管文件会直接停止，避免静默覆盖。共享模块的本地说明见 `packages/blog-kit/README.md`。
 
-推送共享文章到 `main` 后，`.github/workflows/sync-articles.yml` 会向 `ww028/allenwei-website` 的 `automation/sync-blog-articles` 分支写入受管理内容，并创建或刷新 PR。该工作流需要在本仓库配置 `PERSONAL_REPO_TOKEN`：使用仅授权 `ww028/allenwei-website` 的 fine-grained token，并授予 Contents、Pull requests 的读写权限。未配置时任务会安全跳过；配置后可从 Actions 手动运行一次验证。合并 PR 后，个人网站仍由人工发布。
+推送共享文章到 `main` 后，`.github/workflows/sync-articles.yml` 会向 `ww028/allenwei-website` 的 `automation/sync-blog-articles` 分支写入受管理内容，并创建或刷新 PR。该工作流需要在本仓库配置 `PERSONAL_REPO_TOKEN`：使用仅授权 `ww028/allenwei-website` 的 fine-grained token，并授予 Contents、Pull requests 的读写权限。未配置时任务会安全跳过；配置后可从 Actions 手动运行一次验证。个人站验证通过并满足来源、提交 SHA 与文件白名单约束后会自动 squash merge；个人服务器仍由人工发布。
+
+完整操作手册见 [`docs/article-publishing-workflow.md`](docs/article-publishing-workflow.md)。
 
 ## 部署
 
