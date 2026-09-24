@@ -1,0 +1,113 @@
+name: Sync shared articles to personal website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/articles/**"
+      - "public/article-assets/**"
+      - "scripts/sync-articles.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-articles-to-personal
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      PERSONAL_REPO_TOKEN: ${{ secrets.PERSONAL_REPO_TOKEN }}
+      TARGET_REPOSITORY: ww028/allenwei-website
+      SYNC_BRANCH: automation/sync-blog-articles
+    steps:
+      - name: Check cross-repository credential
+        id: credential
+        shell: bash
+        run: |
+          if [[ -n "$PERSONAL_REPO_TOKEN" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "### Article sync skipped"
+              echo "Repository secret PERSONAL_REPO_TOKEN is not configured."
+              echo "Add a fine-grained token for ww028/allenwei-website with Contents and Pull requests read/write, then run this workflow manually."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Checkout blog source
+        if: steps.credential.outputs.configured == 'true'
+        uses: actions/checkout@v4
+        with:
+          path: blog-source
+
+      - name: Set up Node.js
+        if: steps.credential.outputs.configured == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: blog-source/package-lock.json
+
+      - name: Install sync dependencies
+        if: steps.credential.outputs.configured == 'true'
+        working-directory: blog-source
+        run: npm ci
+
+      - name: Checkout personal website
+        if: steps.credential.outputs.configured == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.TARGET_REPOSITORY }}
+          token: ${{ env.PERSONAL_REPO_TOKEN }}
+          path: personal-site
+          fetch-depth: 0
+
+      - name: Synchronize managed content
+        if: steps.credential.outputs.configured == 'true'
+        working-directory: blog-source
+        run: node scripts/sync-articles.mjs --target ../personal-site --write
+
+      - name: Commit synchronized content
+        if: steps.credential.outputs.configured == 'true'
+        id: changes
+        working-directory: personal-site
+        shell: bash
+        run: |
+          mkdir -p public/article-assets
+          git add -A -- content/.article-sync-manifest.json content/shared public/article-assets
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No shared article changes were produced." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$SYNC_BRANCH"
+          git commit -m "chore: sync shared articles from ww028.github.io"
+          git push --force origin "HEAD:$SYNC_BRANCH"
+
+      - name: Create or refresh pull request
+        if: steps.credential.outputs.configured == 'true' && steps.changes.outputs.changed == 'true'
+        working-directory: personal-site
+        env:
+          GH_TOKEN: ${{ env.PERSONAL_REPO_TOKEN }}
+          SOURCE_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          existing="$(gh pr list --repo "$TARGET_REPOSITORY" --head "$SYNC_BRANCH" --base main --state open --json number --jq '.[0].number // empty')"
+          if [[ -z "$existing" ]]; then
+            gh pr create \
+              --repo "$TARGET_REPOSITORY" \
+              --base main \
+              --head "$SYNC_BRANCH" \
+              --title "chore: sync shared blog articles" \
+              --body "Automated content sync from ww028/ww028.github.io at commit \`$SOURCE_SHA\`. This PR updates only manifest-managed shared articles and article assets. Review and merge it, then publish the personal website manually."
+          else
+            gh pr comment "$existing" --repo "$TARGET_REPOSITORY" --body "Updated from blog commit \`$SOURCE_SHA\`."
+          fi

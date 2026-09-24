@@ -3,13 +3,16 @@ import { Suspense } from "react";
 import { getAllArticles, getAllTags } from "@/lib/articles";
 import ArticleList from "@/components/ArticleList";
 
+const siteUrl = "https://ww028.github.io";
+const authorUrl = "https://allenwei.top";
+
 export const metadata: Metadata = {
   title: "魏微的博客",
   description: "魏微的个人博客，记录生活、思考与实践。",
   openGraph: {
     title: "魏微的博客",
     description: "记录生活、思考与实践",
-    url: "https://allenwei.top",
+    url: siteUrl,
     type: "website",
     locale: "zh_CN",
     siteName: "魏微的博客",
@@ -21,11 +24,11 @@ const jsonLd = {
   "@type": "Blog",
   name: "魏微的博客",
   description: "记录生活、思考与实践",
-  url: "https://allenwei.top",
+  url: siteUrl,
   author: {
     "@type": "Person",
     name: "魏微",
-    url: "https://allenwei.top",
+    url: authorUrl,
   },
 };
 
@@ -42,7 +45,14 @@ export default function Home() {
       <div>
         <Suspense fallback={<div className="animate-pulse">加载中...</div>}>
           <ArticleList
-            articles={articles.map(({ content, ...rest }) => rest)}
+            articles={articles.map(({ slug, title, summary, date, pinned, tags }) => ({
+              slug,
+              title,
+              summary,
+              date,
+              pinned,
+              tags,
+            }))}
             tags={tags}
           />
         </Suspense>

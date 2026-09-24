@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://allenwei.top";
+const siteUrl = "https://ww028.github.io";
+const authorUrl = "https://allenwei.top";
 
 export const metadata: Metadata = {
   title: {
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     "个人博客",
     "魏微",
   ],
-  authors: [{ name: "魏微", url: siteUrl }],
+  authors: [{ name: "魏微", url: authorUrl }],
   creator: "魏微",
   publisher: "魏微",
   openGraph: {

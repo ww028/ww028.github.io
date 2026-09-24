@@ -12,6 +12,9 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+const siteUrl = "https://ww028.github.io";
+const authorUrl = "https://allenwei.top";
+
 export function generateStaticParams() {
   return getAllArticles().map((article) => ({ slug: article.slug }));
 }
@@ -29,14 +32,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.title,
     description: article.summary,
     keywords,
-    authors: [{ name: "魏微", url: "https://allenwei.top" }],
+    authors: [{ name: "魏微", url: authorUrl }],
     openGraph: {
       title: article.title,
       description: article.summary,
       type: "article",
       publishedTime: article.date,
       authors: ["魏微"],
-      url: `https://allenwei.top/articles/${article.slug}`,
+      url: `${siteUrl}/articles/${article.slug}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -48,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       follow: true,
     },
     alternates: {
-      canonical: `https://allenwei.top/articles/${article.slug}`,
+      canonical: `${siteUrl}/articles/${article.slug}`,
     },
   };
 }
@@ -67,8 +70,9 @@ export default async function ArticlePage({ params }: Props) {
     headline: article.title,
     description: article.summary,
     datePublished: article.date,
-    author: { "@type": "Person", name: "魏微", url: "https://allenwei.top" },
-    url: `https://allenwei.top/articles/${article.slug}`,
+    author: { "@type": "Person", name: "魏微", url: authorUrl },
+    url: `${siteUrl}/articles/${article.slug}`,
+    mainEntityOfPage: `${siteUrl}/articles/${article.slug}`,
   };
 
   const allArticles = getAllArticles().map(({ slug, title, pinned }) => ({ slug, title, pinned }));
